@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrowLoop - Modern Student Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-poppins bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                            GrowLoop
+                        </h1>
+                    </div>
+                    <div class="hidden md:ml-10 md:flex md:space-x-8">
+                        <a href="#" class="nav-link active text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium transition-colors duration-200" data-page="home">Home</a>
+                        <a href="#" class="nav-link text-gray-500 hover:text-purple-600 px-3 py-2 text-sm font-medium transition-colors duration-200" data-page="skill_hub">Skill Hub</a>
+                        <a href="#" class="nav-link text-gray-500 hover:text-purple-600 px-3 py-2 text-sm font-medium transition-colors duration-200" data-page="career">Career</a>
+                        <a href="#" class="nav-link text-gray-500 hover:text-purple-600 px-3 py-2 text-sm font-medium transition-colors duration-200" data-page="store">Store</a>
+                        <a href="#" class="nav-link text-gray-500 hover:text-purple-600 px-3 py-2 text-sm font-medium transition-colors duration-200" data-page="journey">Journey</a>
+                        <a href="#" class="nav-link text-gray-500 hover:text-purple-600 px-3 py-2 text-sm font-medium transition-colors duration-200" data-page="campus">Campus</a>
+                        <a href="#" class="nav-link text-gray-500 hover:text-purple-600 px-3 py-2 text-sm font-medium transition-colors duration-200" data-page="marketplace">Marketplace</a>
+                        <a href="#" class="nav-link text-gray-500 hover:text-purple-600 px-3 py-2 text-sm font-medium transition-colors duration-200" data-page="events">Events</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <!-- Theme Selector -->
+                    <div class="relative">
+                        <button id="themeToggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5H9m12 0v6m0 0v6m0-6h-3m3 0h-3"></path>
+                            </svg>
+                        </button>
+                        <div id="themeDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                            <div class="p-2">
+                                <button class="theme-option w-full text-left px-3 py-2 rounded hover:bg-gray-100 flex items-center" data-theme="purple">
+                                    <div class="w-4 h-4 bg-purple-600 rounded-full mr-3"></div>
+                                    Purple Theme
+                                </button>
+                                <button class="theme-option w-full text-left px-3 py-2 rounded hover:bg-gray-100 flex items-center" data-theme="dark">
+                                    <div class="w-4 h-4 bg-gray-800 rounded-full mr-3"></div>
+                                    Dark Theme
+                                </button>
+                                <button class="theme-option w-full text-left px-3 py-2 rounded hover:bg-gray-100 flex items-center" data-theme="light">
+                                    <div class="w-4 h-4 bg-gray-100 border rounded-full mr-3"></div>
+                                    Light Theme
+                                </button>
+                                <button class="theme-option w-full text-left px-3 py-2 rounded hover:bg-gray-100 flex items-center" data-theme="blue">
+                                    <div class="w-4 h-4 bg-blue-600 rounded-full mr-3"></div>
+                                    Blue Theme
+                                </button>
+                                <button class="theme-option w-full text-left px-3 py-2 rounded hover:bg-gray-100 flex items-center" data-theme="green">
+                                    <div class="w-4 h-4 bg-green-600 rounded-full mr-3"></div>
+                                    Green Theme
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="loginBtn" class="hidden md:block bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-200">
+                        Sign In
+                    </button>
+                    <div id="userMenu" class="hidden flex items-center space-x-2">
+                        <span id="userName" class="text-gray-700 font-medium"></span>
+                        <button id="adminBtn" class="hidden bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700 transition-colors duration-200">
+                            Admin
+                        </button>
+                        <button id="logoutBtn" class="text-red-600 hover:text-red-700 text-sm font-medium">Logout</button>
+                    </div>
+                    <button id="mobileMenuBtn" class="md:hidden text-gray-500 hover:text-purple-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" class="mobile-nav-link block px-3 py-2 text-base font-medium text-gray-900 hover:text-purple-600" data-page="home">Home</a>
+                <a href="#" class="mobile-nav-link block px-3 py-2 text-base font-medium text-gray-500 hover:text-purple-600" data-page="skill_hub">Skill Hub</a>
+                <a href="#" class="mobile-nav-link block px-3 py-2 text-base font-medium text-gray-500 hover:text-purple-600" data-page="career">Career</a>
+                <a href="#" class="mobile-nav-link block px-3 py-2 text-base font-medium text-gray-500 hover:text-purple-600" data-page="store">Store</a>
+                <a href="#" class="mobile-nav-link block px-3 py-2 text-base font-medium text-gray-500 hover:text-purple-600" data-page="journey">Journey</a>
+                <a href="#" class="mobile-nav-link block px-3 py-2 text-base font-medium text-gray-500 hover:text-purple-600" data-page="campus">Campus</a>
+                <a href="#" class="mobile-nav-link block px-3 py-2 text-base font-medium text-gray-500 hover:text-purple-600" data-page="marketplace">Marketplace</a>
+                <a href="#" class="mobile-nav-link block px-3 py-2 text-base font-medium text-gray-500 hover:text-purple-600" data-page="events">Events</a>
+                <button id="mobileLoginBtn" class="w-full mt-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-200">
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="pt-16 min-h-screen">
+        <div id="pageContent">
+            <!-- Content will be loaded here -->
+        </div>
+    </main>
+
+    <!-- Login/Register Modal -->
+    <div id="authModal" class="modal-overlay hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="modal-content bg-white rounded-lg p-8 max-w-md w-full mx-4 transform transition-all duration-300 scale-95 opacity-0">
+            <div class="flex justify-between items-center mb-6">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900">Sign In</h2>
+                <button id="closeModal" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div id="loginForm" class="space-y-4">
+                <div>
+                    <input type="email" id="loginEmail" placeholder="Email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-all duration-200">
+                </div>
+                <div>
+                    <input type="password" id="loginPassword" placeholder="Password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-all duration-200">
+                </div>
+                <button id="loginSubmit" class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors duration-200 font-medium">
+                    Sign In
+                </button>
+                <p class="text-center text-gray-600">
+                    Don't have an account? 
+                    <button id="showRegister" class="text-purple-600 hover:text-purple-700 font-medium">Sign up</button>
+                </p>
+            </div>
+            
+            <div id="registerForm" class="hidden space-y-4">
+                <div>
+                    <input type="text" id="registerName" placeholder="Full Name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-all duration-200">
+                </div>
+                <div>
+                    <input type="email" id="registerEmail" placeholder="Email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-all duration-200">
+                </div>
+                <div>
+                    <input type="password" id="registerPassword" placeholder="Password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-all duration-200">
+                </div>
+                <button id="registerSubmit" class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors duration-200 font-medium">
+                    Sign Up
+                </button>
+                <p class="text-center text-gray-600">
+                    Already have an account? 
+                    <button id="showLogin" class="text-purple-600 hover:text-purple-700 font-medium">Sign in</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="adminModal" class="modal-overlay hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="modal-content bg-white rounded-lg p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">Admin Panel</h2>
+                <button id="closeAdminModal" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Admin Tabs -->
+            <div class="flex space-x-4 mb-6 border-b">
+                <button class="admin-tab active px-4 py-2 border-b-2 border-purple-600 text-purple-600 font-medium" data-tab="courses">Courses</button>
+                <button class="admin-tab px-4 py-2 text-gray-600 hover:text-purple-600 font-medium" data-tab="events">Events</button>
+                <button class="admin-tab px-4 py-2 text-gray-600 hover:text-purple-600 font-medium" data-tab="marketplace">Marketplace</button>
+                <button class="admin-tab px-4 py-2 text-gray-600 hover:text-purple-600 font-medium" data-tab="users">Users</button>
+                <button class="admin-tab px-4 py-2 text-gray-600 hover:text-purple-600 font-medium" data-tab="analytics">Analytics</button>
+            </div>
+            
+            <!-- Admin Content -->
+            <div id="adminContent">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal-overlay hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="modal-content bg-white rounded-lg p-8 max-w-md w-full mx-4 transform transition-all duration-300 scale-95 opacity-0">
+            <div class="flex justify-between items-center mb-6">
+                <h2 id="uploadModalTitle" class="text-2xl font-bold text-gray-900">Upload Content</h2>
+                <button id="closeUploadModal" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <form id="uploadForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Title</label>
+                    <input type="text" id="uploadTitle" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                    <textarea id="uploadDescription" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Price (if applicable)</label>
+                    <input type="number" id="uploadPrice" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                    <select id="uploadCategory" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                        <option value="course">Course</option>
+                        <option value="event">Event</option>
+                        <option value="marketplace">Marketplace Item</option>
+                        <option value="announcement">Announcement</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Image URL</label>
+                    <input type="url" id="uploadImage" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                </div>
+                <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors duration-200 font-medium">
+                    Upload Content
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- AI Chat Bot -->
+    <div id="chatBot" class="fixed bottom-4 right-4 z-40">
+        <button id="chatToggle" class="bg-purple-600 text-white rounded-full p-3 shadow-lg hover:bg-purple-700 transition-all duration-200 hover:scale-105">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+        </button>
+        
+        <div id="chatWindow" class="hidden absolute bottom-16 right-0 w-80 h-96 bg-white rounded-lg shadow-xl border border-gray-200">
+            <div class="bg-purple-600 text-white p-4 rounded-t-lg">
+                <h3 class="font-semibold">AI Study Assistant</h3>
+            </div>
+            <div id="chatMessages" class="h-64 overflow-y-auto p-4 space-y-2">
+                <div class="text-gray-600 text-sm">Hi! I'm your AI study assistant. How can I help you today?</div>
+            </div>
+            <div class="p-4 border-t">
+                <div class="flex space-x-2">
+                    <input type="text" id="chatInput" placeholder="Ask me anything..." class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent text-sm">
+                    <button id="chatSend" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-200">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script defer src="js/main.js"></script>
+</body>
+</html>
